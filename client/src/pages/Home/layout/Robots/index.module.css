@@ -1,0 +1,26 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+h1 {
+  color: #222222;
+  line-height: 1.2em !important;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-weight: 600;
+}
+.robotSection {
+  padding: 7rem 0;
+}
+.robotsSectionTop {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.robotParagraph {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #777777;
+}
+.robotHeading {
+  padding-bottom: 10px;
+  font-size: 36px;
+}
