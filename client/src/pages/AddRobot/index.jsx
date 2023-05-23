@@ -20,6 +20,7 @@ const AddRobot = () => {
       name: "",
       description: "",
       imageURL: "",
+      price:""
     },
     onSubmit: handleSubmit,
     validationSchema: RobotValidation,
@@ -77,8 +78,22 @@ const AddRobot = () => {
               {formik.errors.imageURL && formik.touched.imageURL && (
                 <span style={{ color: "red" }}>{formik.errors.imageURL}</span>
               )}
+              <TextField
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.price}
+                className={style.input}
+                type="number"
+                name="price"
+                id="outlined-basic"
+                label="Enter Price..."
+                variant="outlined"
+              />
+              {formik.errors.price && formik.touched.price && (
+                <span style={{ color: "red" }}>{formik.errors.price}</span>
+              )}
               <Button variant="contained" color="success" type="submit">
-                Submit
+                ADD
               </Button>
             </form>
           </div>

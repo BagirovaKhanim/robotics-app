@@ -1,8 +1,8 @@
 import AddRobot from "../pages/AddRobot";
+import EditRobot from "../pages/EditRobot";
 import Home from "../pages/Home";
 import MainRoot from "../pages/MainRoot";
 import RobotDetail from "../pages/RobotDetail";
-import RobotEDit from "../pages/RobotEdit";
 
 export const ROUTES = [
   {
@@ -23,7 +23,7 @@ export const ROUTES = [
       },
       {
         path: "robots/edit/:id",
-        element: <RobotEDit />,
+        element: <EditRobot/>,
       },
     ],
   },

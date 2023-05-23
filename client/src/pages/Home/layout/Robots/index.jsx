@@ -12,9 +12,16 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import FilterListIcon from '@mui/icons-material/FilterList';
+
 const Robots = () => {
   const { id } = useParams();
   const [robots, setRobots] = useState([]);
+  const [isSorted, setIsSorted] = useState(false);
+
   useEffect(() => {
     getAllRobots().then((res) => {
       setRobots(res);
@@ -32,33 +39,48 @@ const Robots = () => {
   function handleSearch(e) {
     getAllRobots(e.target.value).then((res) => {
       setRobots(res);
-      console.log(e.target.value);
     });
+  }
+  function handleSort() {
+    let sortedRobots = [...robots];
+    if (isSorted) {
+      sortedRobots.sort((a, b) => a.price - b.price);
+    } else {
+      sortedRobots.sort((a, b) => b.price - a.price);
+    }
+    setRobots(sortedRobots);
+    setIsSorted(!isSorted);
   }
   return (
     <>
       <section className={style.robotSection}>
         <Container maxWidth="lg">
-          <Paper
-            component="form"
-            sx={{
-              p: "2px 4px",
-              display: "flex",
-              alignItems: "center",
-              width: 400,
-              marginBottom: "12px",
-            }}
-          >
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search Authors"
-              onChange={(e) => handleSearch(e)}
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </Paper>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Paper
+              component="form"
+              sx={{
+                p: "2px 4px",
+                display: "flex",
+                alignItems: "center",
+                width: 400,
+                marginBottom: "12px",
+              }}
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search Authors"
+                onChange={(e) => handleSearch(e)}
+                inputProps={{ "aria-label": "search google maps" }}
+              />
+              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+            <Button onClick={handleSort}><FilterListIcon
+              style={{ marginLeft: '1rem', fontSize: '3.5rem', color: 'rgb(195,150,255)' }}
+            /></Button>
+
+          </div>
           <div className={style.robotsSectionTop}>
             <h1 className={style.robotHeading}>
               Featured Robotics Products to Show
@@ -76,12 +98,13 @@ const Robots = () => {
                       hoverable
                       style={{ height: "400px" }}
                       cover={
-                        <img
-                          alt="example"
-                          height="200px"
-                          src={robot.imageURL}
-                          style={{ overflow: "hidden" }}
-                        />
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                          <img
+                            alt="example"
+                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                            src={robot.imageURL}
+                          />
+                        </div>
                       }
                     >
                       <div
@@ -95,6 +118,10 @@ const Robots = () => {
                           <Typography>
                             <b>Description:</b>
                             {robot.description}
+                          </Typography>
+                          <Typography>
+                            <b>Price:</b>
+                            {robot.price}$
                           </Typography>
                           <div
                             style={{
@@ -112,7 +139,7 @@ const Robots = () => {
                                 style={{ color: "rgb(188,150,255)" }}
                                 to={`robots/detail/${robot._id}`}
                               >
-                                VIEW DETAILS
+                                <VisibilityIcon />
                               </Link>
                             </Button>
                             <Button
@@ -120,14 +147,14 @@ const Robots = () => {
                               color="error"
                               onClick={(e) => handleDelete(robot._id)}
                             >
-                              DELETE
+                              <DeleteIcon />
                             </Button>
                             <Button variant="outlined" color="error">
                               <Link
                                 style={{ color: "red" }}
-                                to={`robots/edit/${id}`}
+                                to={`robots/edit/${robot._id}`}
                               >
-                                EDIT
+                                <EditIcon />
                               </Link>
                             </Button>
                           </div>

@@ -1,0 +1,19 @@
+.img {
+    background-image: url("https://preview.colorlib.com/theme/robotics/img/footer-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: no-repeat;
+    width: 100%;
+    padding: 7rem 0;
+  }
+  .list{
+    display: flex;
+    margin-left: 65%;
+  }
+  .listItem{
+    color: white;
+    border: 1px solid black;
+    padding: 10px ;
+    background-color: rgba(0, 0, 0, 0.587);
+    margin-left: 12px;
+  }

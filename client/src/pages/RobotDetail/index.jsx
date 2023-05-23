@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Button, Container, Grid, Typography } from "@mui/material";
-import style from "./index.module.css";
 import { useState } from "react";
 import { getRobotByID } from "../../api/httprequests";
 import { Link, useParams } from "react-router-dom";
@@ -21,43 +20,45 @@ const RobotDetail = () => {
             ROBOT DETAIL
           </h1>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Grid item key={robot._id} lg={3} md={6} sm={12} xs={12}>
-              <Card
-                hoverable
-                style={{ height: "400px" }}
-                cover={
-                  <img
-                    alt="example"
-                    height="200px"
-                    src={robot.imageURL}
-                    style={{ overflow: "hidden" }}
-                  />
-                }
-              >
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <div>
-                    <Typography>
-                      <b>Name:</b>
-                      {robot.name}
-                    </Typography>
-                    <Typography>
-                      <b>Description:</b>
-                      {robot.description}
-                    </Typography>
-                    <Button
-                      variant="outlined"
-                      style={{
-                        border: "1px solid rgb(188,150,255)",
-                      }}
+          <Grid item  lg={3} md={6} sm={12} xs={12}>
+                    <Card
+                      hoverable
+                      style={{ height: "400px" }}
+                      cover={
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                          <img
+                            alt="example"
+                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                            src={robot.imageURL}
+                          />
+                        </div>
+                      }
                     >
-                      <Link style={{ color: "rgb(188,150,255)" }} to="/">
-                        GO BACK
-                      </Link>
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <div>
+                          <Typography>
+                            <b>Name:</b>
+                            {robot.name}
+                          </Typography>
+                          <Typography>
+                            <b>Description:</b>
+                            {robot.description}
+                          </Typography>
+                          <Typography>
+                            <b>Price:</b>
+                            {robot.price}$
+                          </Typography>
+                        </div>
+                      </div>
+                    </Card>
+                    <div style={{display:"flex" , justifyContent:"center" , marginTop:'10px'}}>
+                    <Button variant="contained" style={{backgroundColor:'rgb(149,155,255)'}}>
+                      <Link style={{color:"white"}} to='/'>GO BACK</Link>
                     </Button>
-                  </div>
-                </div>
-              </Card>
-            </Grid>
+                    </div>
+                  </Grid>
           </div>
         </Container>
       </section>

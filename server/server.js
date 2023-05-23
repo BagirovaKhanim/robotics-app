@@ -18,6 +18,7 @@ const RobotSchema = new Schema({
   name: String,
   description: String,
   imageURL: String,
+  price:Number,
 });
 
 //Model
@@ -32,11 +33,12 @@ app.get("/api", (req, res) => {
 
 //Post
 app.post("/api/robots", async (req, res) => {
-  const { name, description, imageURL } = req.body;
+  const { name, description, imageURL , price } = req.body;
   const newRobot = new RobotModel({
     name: name,
     description: description,
     imageURL: imageURL,
+    price:price,
   });
   await newRobot.save();
   res.status(201).send("Created");
@@ -86,11 +88,12 @@ app.delete("/api/robots/:id", async (req, res) => {
 //Edit By ID
 app.put("/api/robots/:id", async (req, res) => {
   const { id } = req.params;
-  const { name, description, imageURL } = req.body;
+  const { name, description, imageURL, price } = req.body;
   const existedRobot = await RobotModel.findByIdAndUpdate(id, {
     name: name,
     description: description,
     imageURL: imageURL,
+    price:price
   });
   if (!existedRobot) {
     res.status(204).send("Data Not Found");
